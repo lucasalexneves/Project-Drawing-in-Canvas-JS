@@ -14,6 +14,7 @@ document.querySelectorAll('.colorArea .color').forEach(item => {
 screen.addEventListener('mousedown', mouseDownEvent)
 screen.addEventListener('mousemove', mouseMoveEvent)
 screen.addEventListener('mouseup', mouseUpEvent)
+document.querySelector('.clear').addEventListener('click', clearScreen)
 
 
 /*
@@ -32,7 +33,7 @@ function colorClickEvent(e){
     e.target.classList.add('active')
 }
 
-function mouseDownEvent(){
+function mouseDownEvent(e){
     canDraw = true
     mouseX = e.pageX - screen.offsetLeft
     mouseY = e.pageY - screen.offsetTop
@@ -50,7 +51,7 @@ function mouseUpEvent(){
 
 function Draw(x, y){
     let pointX = x - screen.offsetLeft
-    let pointY = y - screenTop
+    let pointY = y - screen.offsetTop
 
     ctx.beginPath()
     ctx.lineWidth = 5
@@ -63,4 +64,9 @@ function Draw(x, y){
 
     mouseX = pointX
     mouseY = pointY
+}
+
+function clearScreen() {
+    ctx.setTransform(1, 0, 0, 1, 0, 0)
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
 }
